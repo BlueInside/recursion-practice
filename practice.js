@@ -1,7 +1,25 @@
-function productOfArray(numArray, result = 1) {
-  let copy = numArray.slice();
-  if (!copy[0]) return result;
-  result *= copy[0];
-  copy.shift();
-  return productOfArray(copy, result);
+const nestedObject = {
+  data: {
+    info: {
+      stuff: {
+        thing: {
+          moreStuff: {
+            magicNumber: 44,
+            something: 'foo2222',
+          },
+        },
+      },
+    },
+  },
+};
+
+function contains(objectToSearch, value) {
+  const keys = Object.keys(objectToSearch);
+  for (let key of keys) {
+    if (objectToSearch[key] === value) return true;
+    else if (typeof objectToSearch[key] === 'object') {
+      return contains(objectToSearch[key], value);
+    }
+  }
+  return false;
 }
